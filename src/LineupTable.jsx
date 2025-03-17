@@ -1,60 +1,58 @@
-import { Table, Spinner } from "react-bootstrap";
-import { positions, shiftTypeLineupHours } from "./DataForDutch";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React from "react";
+import { Table } from "react-bootstrap";
+import { positions } from "./DataForDutch";
 
-const LineupTable = ({ lineup, shiftType }) => {
-  if (!shiftType) {
-    return (
-      <div className="loading">
-        <p>Waiting on Shift Type...</p>
-      </div>
-    );
-  }
-
-  const shiftTimes =
-    shiftTypeLineupHours.find((shift) => shift.shiftType === shiftType)?.times ||
-    [];
+const LineupTable = ({ assignments = [], timeSlots = [] }) => {
+  // Debugging logs to track state and props
+  
 
   return (
-    <>
-      <h2>{shiftType} Position Chart</h2>
-      {lineup.length === 0 ? (
-        <p>No lineup data available for this shift type.</p>
+    <div>
+      <h3>Lineup Table</h3>
+      {assignments.length === 0 ? (
+        <p>No data available. Please add and randomize assignments.</p>
       ) : (
         <Table striped bordered hover>
           <thead>
             <tr>
               <th>Position</th>
-              {shiftTimes.map((time, idx) => (
-                <th key={idx}>{time}</th>
+              {timeSlots.map((timeSlot, index) => (
+                <th key={index}>{timeSlot}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {positions.map((positionObj, positionIdx) => (
-              <tr key={positionIdx}>
-                <td>{positionObj.position}</td>
-                {shiftTimes.map((time, timeIdx) => {
-                  const person = lineup.find(
-                    (entry) =>
-                      entry.position === positionObj.position &&
-                      entry.timeSlot === time
+            {positions.map((pos, posIndex) => (
+              <tr key={posIndex}>
+                <td>
+                  <strong>{pos.position}</strong>
+                </td>
+                {timeSlots.map((timeSlot, timeIndex) => {
+                  // Find the assignment for this position and time slot
+                  const assignmentForCell = assignments.find(
+                    (assignment) =>
+                      assignment.timeSlot === timeSlot &&
+                      assignment.assignments.some(
+                        (a) => a.position.position === pos.position // Fix to access position property correctly
+                      )
                   );
 
-                  return (
-                    <td key={timeIdx}>
-                      {person
-                        ? person.shiftLead || person.broista
-                        : "—"} {/* Display Shift Lead, Broista, or empty */}
-                    </td>
-                  );
+                  // Extract the broista's name if available
+                  const broista = assignmentForCell
+                    ? assignmentForCell.assignments.find(
+                        (a) => a.position.position === pos.position
+                      )?.broista
+                    : null;
+
+                  // Render the broista's name or leave the cell empty
+                  return <td key={timeIndex}>{broista || ""}</td>;
                 })}
               </tr>
             ))}
           </tbody>
         </Table>
       )}
-    </>
+    </div>
   );
 };
 

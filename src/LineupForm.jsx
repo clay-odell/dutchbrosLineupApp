@@ -11,6 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { shiftLengthHelper } from "./utils/shiftLengthHelper";
 import { shiftLengthBreakCalculator } from "./utils/shiftLengthHelper";
 import LineupTable from "./LineupTable";
+import LineupRandomizer from "./LineupRandomizer";
 
 const LineupForm = () => {
   const [formData, setFormData] = useState({
@@ -55,7 +56,6 @@ const LineupForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-
     const shiftLength = shiftLengthHelper(
       formData.shiftStart,
       formData.shiftEnd
@@ -73,7 +73,7 @@ const LineupForm = () => {
 
     setLineup((prevLineup) => {
       const updatedLineup = [...prevLineup, lineupEntry];
-      console.log("Updated Lineup:", updatedLineup);
+     
       return updatedLineup;
     });
 
@@ -198,44 +198,6 @@ const LineupForm = () => {
         )}
         <br />
 
-        <Form.Group controlId="select-position">
-          <Form.Label>Select a Position</Form.Label>
-          <Form.Select
-            name="position"
-            value={formData.position}
-            onChange={handleSelectChange}
-          >
-            <option value="">Select a Position</option>
-            {positionOptions.map((pos, idx) => (
-              <option key={idx} value={pos.position}>
-                {pos.position}
-              </option>
-            ))}
-          </Form.Select>
-        </Form.Group>
-        <br />
-
-        {formData.shiftType && (
-          <>
-            <Form.Group controlId="select-timeSlot">
-              <Form.Label>Select a Time Slot</Form.Label>
-              <Form.Select
-                name="timeSlot"
-                value={formData.timeSlot}
-                onChange={handleSelectChange}
-              >
-                <option value="">Select a Time Slot</option>
-                {timeSlot.map((hour, idx) => (
-                  <option key={idx} value={hour}>
-                    {hour}
-                  </option>
-                ))}
-              </Form.Select>
-            </Form.Group>
-            <br />
-          </>
-        )}
-
         <Button type="submit">Add to Lineup</Button>
         <Button variant="secondary" onClick={handleUndoLast}>
           Undo Last Lineup Entry
@@ -279,7 +241,15 @@ const LineupForm = () => {
           </ul>
         </div>
       )}
-      <LineupTable shiftType={formData.shiftType} lineup={lineup} />
+      <LineupRandomizer
+        shiftType={formData.shiftType}
+        shop={formData.shop}
+        broistas={broistas} 
+        positionOptions={positionOptions}
+        timeSlot={timeSlot}
+      />
+
+      
     </Container>
   );
 };
