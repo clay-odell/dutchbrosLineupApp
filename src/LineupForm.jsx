@@ -6,7 +6,7 @@ import {
   shiftTypeLineupHours,
   storeHours,
 } from "./DataForDutch";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { shiftLengthHelper } from "./utils/shiftLengthHelper";
 import { shiftLengthBreakCalculator } from "./utils/shiftLengthHelper";
@@ -73,7 +73,7 @@ const LineupForm = () => {
 
     setLineup((prevLineup) => {
       const updatedLineup = [...prevLineup, lineupEntry];
-     
+
       return updatedLineup;
     });
 
@@ -92,6 +92,7 @@ const LineupForm = () => {
 
   return (
     <Container>
+      <Card>
       <h2>Lineup Form</h2>
 
       <Form onSubmit={handleSubmit}>
@@ -241,15 +242,17 @@ const LineupForm = () => {
           </ul>
         </div>
       )}
+      </Card>
+      <Card>
       <LineupRandomizer
         shiftType={formData.shiftType}
+        handleSelectChange={handleSelectChange}
         shop={formData.shop}
-        broistas={broistas} 
+        broistas={broistas}
         positionOptions={positionOptions}
         timeSlot={timeSlot}
       />
-
-      
+      </Card>
     </Container>
   );
 };

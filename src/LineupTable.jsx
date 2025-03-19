@@ -1,5 +1,5 @@
 import React from "react";
-import { Table } from "react-bootstrap";
+import { Card, Table } from "react-bootstrap";
 import { positions } from "./DataForDutch";
 
 const LineupTable = ({ assignments = [], timeSlots = [] }) => {
@@ -8,6 +8,7 @@ const LineupTable = ({ assignments = [], timeSlots = [] }) => {
 
   return (
     <div>
+      <Card>
       <h3>Lineup Table</h3>
       {assignments.length === 0 ? (
         <p>No data available. Please add and randomize assignments.</p>
@@ -52,6 +53,7 @@ const LineupTable = ({ assignments = [], timeSlots = [] }) => {
           </tbody>
         </Table>
       )}
+      </Card>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { broistasData, shiftTypeLineupHours, positions } from "./DataForDutch";
 import { assignBroistasToPositons } from "./utils/broistaRandomizer";
 import LineupTable from "./LineupTable";
 
-const LineupRandomizer = ({ shop, shiftType }) => {
+const LineupRandomizer = ({ shop, shiftType, handleSelectChange }) => {
   const [dynamicBroistas, setDynamicBroistas] = useState([]);
   const [timeSlots, setTimeSlots] = useState([]);
   const [assignments, setAssignments] = useState([]);
@@ -83,6 +83,20 @@ const LineupRandomizer = ({ shop, shiftType }) => {
   return (
     <div>
       <h2>Lineup Randomizer</h2>
+      <Form.Group controlId="select-shift-type">
+          <Form.Label>Select Shift Type</Form.Label>
+          <Form.Select
+            name="shiftType"
+            value={shiftType}
+            onChange={handleSelectChange}
+          >
+            <option value="">Select Shift Type</option>
+            <option value="Morning">Morning</option>
+            <option value="Mid">Mid</option>
+            <option value="Night">Night</option>
+          </Form.Select>
+        </Form.Group>
+        <br />
 
       <h4>Select Time Slot</h4>
       <Form.Group controlId="select-timeSlot">
