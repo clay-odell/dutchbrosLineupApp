@@ -83,6 +83,7 @@ const LineupRandomizer = ({ shop, shiftType, handleSelectChange }) => {
   return (
     <div>
       <h2>Lineup Randomizer</h2>
+      <p>Add all broistas/shiftleads, randomize lineup, and then update table to see results by timeslot. </p>
       <Form.Group controlId="select-shift-type">
           <Form.Label>Select Shift Type</Form.Label>
           <Form.Select

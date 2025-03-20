@@ -93,7 +93,7 @@ const LineupForm = () => {
   return (
     <Container>
       <Card>
-      <h2>Lineup Form</h2>
+      <h2>Shift Length & Break Time Calculator</h2>
 
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="select-shop">
@@ -223,12 +223,17 @@ const LineupForm = () => {
                 )}
                 <ul>
                   <li>
-                    <strong> Position:</strong> {entry.position},
-                    <strong> Time Slot:</strong> {entry.timeSlot},
-                    <strong> Shift Length:</strong> {entry.shiftLength} hours,
+                    
+                    <strong> Shift Start</strong>: {entry.shiftStart}
+                    <br /> 
+                    <strong> Shift End</strong>: {entry.shiftEnd}
+                    <br />
+                    <strong> Shift Length:</strong> {entry.shiftLength} hours
+                    <br />
                     {entry.shiftLength >= 4 ? (
                       <>
                         <strong> Break Time:</strong> {entry.breakTime}
+                        <br />
                       </>
                     ) : (
                       <>
@@ -236,6 +241,7 @@ const LineupForm = () => {
                       </>
                     )}
                   </li>
+                  <hr />
                 </ul>
               </li>
             ))}
