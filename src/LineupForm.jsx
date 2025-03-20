@@ -92,6 +92,7 @@ const LineupForm = () => {
 
   return (
     <Container>
+      <h1>Dutch Bros Lineup Maker App</h1>
       <Card>
       <h2>Shift Length & Break Time Calculator</h2>
 
