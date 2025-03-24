@@ -181,7 +181,6 @@ export const shiftTypeLineupHours = [
   {
     shiftType: "Morning",
     times: [
-      "4:45 AM",
       "5:00 AM",
       "6:00 AM",
       "7:00 AM",
