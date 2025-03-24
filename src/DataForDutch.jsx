@@ -22,7 +22,6 @@ export const broistasData = {
   Owens: [
     "Kayla Agnew",
     "Brady Anderton",
-    "Sunny Gonzales",
     "Riley Henze",
     "Clay O'Dell",
     "Anne Kusserow",
